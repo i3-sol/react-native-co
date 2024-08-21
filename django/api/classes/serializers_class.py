@@ -25,11 +25,12 @@ class SerializersClass(serializers.ModelSerializer):
 
         if (request.query_params.getlist("joins[]")) :
             for index in request.query_params.getlist("joins[]"):
-                data = eval("instance." + index + ".__dict__")
+                if eval("instance." + index) :
+                    data = eval("instance." + index + ".__dict__")
 
-                ret[index] = {}
-                for value in self.joins[index] :
-                    ret[index][value] = data[value]
+                    ret[index] = {}
+                    for value in self.joins[index] :
+                        ret[index][value] = data[value]
 
         if (request.query_params.getlist("images[]")) :
             for index in request.query_params.getlist("images[]"):

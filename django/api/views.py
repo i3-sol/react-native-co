@@ -6,12 +6,16 @@ from .models.open_chat import OpenChat
 from .models.region import Region
 from .models.prefecture import Prefecture
 from .models.event_chat_user_hosted import EventChatUserHosted
+from .models.store_genre import StoreGenre
+from .models.store import Store
 
 from .serializers.opechat_category_serializer import OpenChatCategorySerializer
 from .serializers.opechat_serializer import OpenChatSerializer
 from .serializers.region_serializer import RegionSerializer
 from .serializers.prefecture_serializer import PrefectureSerializer
 from .serializers.event_chat_user_hosted_serializer import EventChatUserHostedSerializer
+from .serializers.store_genre_serializer import StoreGenreSerializer
+from .serializers.store_serializer import StoreSerializer
 
 
 class OpenChatCategoryViewSet(viewsets.ModelViewSet):
@@ -61,3 +65,22 @@ class EventChatUserHostedViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         return EventChatUserHostedSerializer.params(EventChatUserHostedSerializer, self.request)
 
+class StoreGenreViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = StoreGenre.objects
+
+    def get_queryset(self):
+        return StoreGenre.objects.params(self).all()
+    
+    def get_serializer_class(self):
+        return StoreGenreSerializer.params(StoreGenreSerializer, self.request)
+    
+
+class StoreViewSet(viewsets.ModelViewSet):
+    queryset = Store.objects
+
+    def get_queryset(self):
+        return Store.objects.params(self).all()
+    
+    def get_serializer_class(self):
+        return StoreSerializer.params(StoreSerializer, self.request)
+    

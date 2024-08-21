@@ -8,11 +8,16 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+django/media
+django/api/models/__pycache__
+django/api/__pycache__
+django/api/classes/__pycache__
+django/api/serializers/__pycache__
+django/user_auth/__pycache__
+django/project/__pycache__
 ・・・
 
 # ignore static files
 static/
 # ignore migration files
 migrations/
-__pycache__/

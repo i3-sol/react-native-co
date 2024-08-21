@@ -4,3 +4,7 @@ mysqlclient
 python-dotenv
 djangorestframework
 django-cors-headers
+pillow
+django-imagekit
+djangorestframework-simplejwt
+django-filter

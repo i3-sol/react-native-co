@@ -2,8 +2,7 @@ from django.db import models
 from ..classes.model_class import ModelQuerySetClass
 
 class ModelQuerySet(ModelQuerySetClass):
-    pass
-
+     default_field = ["id", "category_name"]
 
 # Reference: ED19_001_テーブル定義書.docx
 class OpenChatCategory(models.Model):

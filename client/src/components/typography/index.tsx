@@ -7,10 +7,20 @@ const TextH1 = styled(Text)(({ theme }) => ({
 	color: theme.typographyFirstColor,
 }))
 
+const TextH2 = styled(Text)(({ theme }) => ({
+	fontSize: 20,
+	fontWeight: 800,
+	color: theme.typographyBaseColor,
+}))
+
 const TextH3 = styled(Text)(({ theme }) => ({
 	fontSize: 12,
 	fontWeight: 800,
 	color: theme.typographyBaseColor,
+}))
+
+const TextActiveH3 = styled(TextH3)(({ theme }) => ({
+	color: theme.typographyActiveColor,
 }))
 
 const TextH4 = styled(Text)(({ theme }) => ({
@@ -56,12 +66,14 @@ const TextBody1 = styled(Text)(({ theme }) => ({
 
 export {
 	TextH1,
+	TextH2,
 	TextH3,
 	TextH4,
 	TextH5,
 	TextH6,
 	TextBody1,
 
+	TextActiveH3,
 	TextActiveH4,
 	TextActive1H4,
 	TextActiveH5,

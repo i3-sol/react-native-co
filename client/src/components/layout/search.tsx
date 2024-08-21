@@ -6,7 +6,7 @@ import { SearchInput } from "../input";
 const SearchBar = () => {
 	return (
 		<SearchBarWarpper>
-			<SearchInput />
+			<SearchInput placeholder="オープンチャットを検索" />
 		</SearchBarWarpper>
 	)
 }

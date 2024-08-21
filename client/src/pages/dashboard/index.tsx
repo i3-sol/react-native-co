@@ -23,7 +23,7 @@ const Dashboard = ({ navigation }: ComPropsObject) => {
 				<BaseDivider />
 
 				{/* Meet now components */}
-				<MeetNow />
+				<MeetNow navigation={navigation} />
 				<BaseDivider />
 
 				{/* Recommended events components */}

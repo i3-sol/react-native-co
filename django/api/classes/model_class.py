@@ -1,4 +1,5 @@
 from django.db import models
+from urllib.parse import unquote
 
 class ModelQuerySetClass(models.QuerySet):
     def params(self, view):
@@ -32,5 +33,13 @@ class ModelQuerySetClass(models.QuerySet):
 
         query = query.only(*fields)
         
+        if view.request.query_params.getlist("wheres[]"):   
+            for value in request.query_params.getlist("wheres[]"):
+               types = unquote(value).split(':')
+
+               if (types[1]) :
+                   query = eval("self.where" + str(types[0]).capitalize() + "('" + types[1] + "')")                   
+               else :
+                   query = eval("self.where" + str(types[0]).capitalize() + "()")                   
 
         return query

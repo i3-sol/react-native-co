@@ -7,74 +7,20 @@ import { recommendedImage3, recommendedImage4, recommendedImage5 } from "../../.
 import { recommendedImage1, recommendedImage10, recommendedImage2 } from "../../../assets/image";
 import { PersonIconSvg, recommendedBadgeImage1, recommendedBadgeImage2 } from "../../../assets/image";
 import { recommendedImage6, recommendedImage7, recommendedImage8, recommendedImage9 } from "../../../assets/image";
+import { useEffectCustom } from "../../../classes/Functions";
+import RestApiClass from "../../../classes/RestApiClass";
 
-interface ChatItemProps {
-	data: ChatObject
-}
 
-interface ChatObject {
-	image: any
-	text: string
-	follow: number
-	badge?: any
-}
-
-const firstChatLists: ChatObject[] = [
-	{
-		image: recommendedImage1,
-		text: "ゴルフも円熟味が増しあいうえお描き",
-		follow: 56,
-	}, {
-		image: recommendedImage2,
-		text: "サッカー少年",
-		follow: 36,
-		badge: recommendedBadgeImage1
-	}, {
-		image: recommendedImage3,
-		text: "温泉同好会",
-		follow: 43,
-		badge: recommendedBadgeImage2,
-	}, {
-		image: recommendedImage4,
-		text: "カメラ好き集",
-		follow: 136,
-		badge: recommendedBadgeImage1
-	}
-]
-
-const secondChatLists: ChatObject[] = [
-	{
-		image: recommendedImage5,
-		text: "ゲームで盛りあがろう",
-		follow: 61,
-	}, {
-		image: recommendedImage6,
-		text: "地域のお祭り巡り",
-		follow: 11,
-		badge: recommendedBadgeImage2,
-	}, {
-		image: recommendedImage7,
-		text: "Yoga",
-		follow: 59,
-	}, {
-		image: recommendedImage8,
-		text: "週末バスケ",
-		follow: 23,
-		badge: recommendedBadgeImage1,
-	}, {
-		image: recommendedImage9,
-		text: "ゲームで盛りあがろう",
-		follow: 136,
-		badge: recommendedBadgeImage1,
-	}, {
-		image: recommendedImage10,
-		text: "ゲームで盛りあがろう",
-		follow: 136,
-		badge: recommendedBadgeImage1,
-	}
-]
 
 const RecommendedChats = () => {
+	const firstChatLists: any = useEffectCustom(async () => {
+		let RestApi: RestApiClass = new RestApiClass("open_chat")
+		RestApi.fields(["id", "chat_name", "age_type", "user_number"])
+		RestApi.images("chat_image_file_name_thumbnail")
+
+		return await RestApi.list({ limit: 20 })
+	});
+
 	return (
 		<RecommendedChatsWrapper>
 			<RecommendedChatsHeader>
@@ -84,58 +30,32 @@ const RecommendedChats = () => {
 
 			<ScrollView horizontal>
 				<RecommendedChatsContainer>
-					{firstChatLists.map((item: ChatObject, key: number) => (
+					{firstChatLists.map((item: any, key: number) => (
 						<FirstChatItem data={item} key={key} />
 					))}
 				</RecommendedChatsContainer>
-			</ScrollView>
-
-			<ScrollView horizontal>
-				<RecommendedChatsContainer1>
-					{secondChatLists.map((item: ChatObject, key: number) => (
-						<SecondChatItem data={item} key={key} />
-					))}
-				</RecommendedChatsContainer1>
 			</ScrollView>
 		</RecommendedChatsWrapper>
 	)
 }
 
-const FirstChatItem = ({ data }: ChatItemProps) => {
+const FirstChatItem = ({ data }: any) => {
+
 	return (
 		<View style={chatItemStyles.container}>
 			{!!data.badge && (
-				<Image source={data.badge} style={chatItemStyles.badgeImage1} />
+				<Image source={require("../../../assets/image/recommended-chats/badge-1.png")} style={chatItemStyles.badgeImage1} />
 			)}
 
-			<Image source={data.image} style={chatItemStyles.image} />
+
+			<Image source={{ uri: data.chat_image_file_name_thumbnail }} style={chatItemStyles.image} />
 			<TextH5 numberOfLines={2} ellipsizeMode="tail" style={{ flex: 1 }}>
-				{data.text}
+				{data.chat_name}
 			</TextH5>
 
 			<View style={chatItemStyles.footer}>
 				<PersonIconSvg width={getWidth(4)} height={getWidth(4)} />
-				<TextFollowCount>{data.follow}</TextFollowCount>
-			</View>
-		</View>
-	)
-}
-
-const SecondChatItem = ({ data }: ChatItemProps) => {
-	return (
-		<View style={chatItemStyles.container2}>
-			{!!data.badge && (
-				<Image source={data.badge} style={chatItemStyles.badgeImage2} />
-			)}
-
-			<Image source={data.image} style={chatItemStyles.image2} />
-			<TextH5 numberOfLines={2} ellipsizeMode="tail" style={{ flex: 1 }}>
-				{data.text}
-			</TextH5>
-
-			<View style={chatItemStyles.footer}>
-				<PersonIconSvg width={getWidth(4)} height={getWidth(4)} />
-				<TextFollowCount>{data.follow}</TextFollowCount>
+				<TextFollowCount>{data.user_number}</TextFollowCount>
 			</View>
 		</View>
 	)

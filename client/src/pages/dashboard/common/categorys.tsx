@@ -1,46 +1,23 @@
-import { View } from "react-native";
+import { View} from "react-native";
 import styled from "styled-components/native";
 
 import { ActiveFirstButton } from "../../../components/button";
 import { TextH3, TextH5 } from "../../../components/typography";
-
-interface CategoryListObject {
-	text: string
-	active: boolean
-}
-
-const categoryLists: CategoryListObject[] = [
-	{
-		text: "学生",
-		active: false,
-	}, {
-		text: "ペット",
-		active: false,
-	}, {
-		text: "金融・ビジネス",
-		active: false,
-	}, {
-		text: "アニメ・漫画",
-		active: false,
-	}, {
-		text: "同世代",
-		active: false,
-	}, {
-		text: "音楽",
-		active: true,
-	}, {
-		text: "職",
-		active: false,
-	}, {
-		text: "芸能人・有名人",
-		active: true,
-	}, {
-		text: "スポーツ",
-		active: false,
-	},
-]
+import { useEffect, useState } from "react";
+import RestApiClass from "../../../classes/RestApiClass";
+import { useEffectCustom } from "../../../classes/Functions";
 
 const Categorys = () => {
+	
+
+	const categoryLists = useEffectCustom(async () => {
+		let RestApi:RestApiClass = new RestApiClass("open_chat_category")
+		RestApi.fields(["id", "category_name"])
+		return await RestApi.list({limit:20})				
+	});
+
+
+
 	return (
 		<CategorysWrapper>
 			<CategorysHeader>
@@ -50,7 +27,7 @@ const Categorys = () => {
 
 			<CategoryContainer>
 				{categoryLists.map((category: CategoryListObject, key: number) => (
-					<ActiveFirstButton text={category.text} active={category.active} key={key} />
+					<ActiveFirstButton text={category.category_name} active={category.active} key={key} />
 				))}
 			</CategoryContainer>
 		</CategorysWrapper>

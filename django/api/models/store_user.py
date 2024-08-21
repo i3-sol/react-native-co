@@ -1,4 +1,8 @@
 from django.db import models
+from ..classes.model_class import ModelQuerySetClass
+
+class ModelQuerySet(ModelQuerySetClass):
+    default_field = ["id", "store_name"]
 
 # Reference: ED19_033_テーブル定義書.docx
 class StoreUser(models.Model):
@@ -10,6 +14,11 @@ class StoreUser(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
+
+    objects = ModelQuerySet.as_manager()
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'store_users'

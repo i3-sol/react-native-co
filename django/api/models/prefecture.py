@@ -5,6 +5,13 @@ from ..classes.model_class import ModelQuerySetClass
 class ModelQuerySet(ModelQuerySetClass):
     default_field = ["id", "prefecture_name"]
 
+    def whereRegion(self, value) :
+        query = self
+
+        query = query.filter(region_id=value)
+
+        return query
+    
 
 # Reference: ED19_039_テーブル定義書.docx
 class Prefecture(models.Model):

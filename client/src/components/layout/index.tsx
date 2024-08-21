@@ -43,6 +43,7 @@ const LayoutWrapper = styled(View)<{ disableHeader: boolean }>(({ theme, disable
 
 const LayoutContainer = styled(View)({
 	flex: 1,
+	position: "relative",
 })
 
 export { Layout };

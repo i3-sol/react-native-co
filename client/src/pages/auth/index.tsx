@@ -14,7 +14,7 @@ const Auth = ({ navigation }: ComPropsObject) => {
 	}
 
 	const onGotoSignUp = () => {
-		navigation.navigate(routerConfig.signup.name);
+		navigation.navigate(routerConfig.socialSignup.name);
 	}
 
 	const onGotoSignin = () => {
@@ -29,12 +29,17 @@ const Auth = ({ navigation }: ComPropsObject) => {
 
 			<AuthContainer>
 				<ActiveThirdButton onPress={onGotoSignUp}>
-					<SignUpText>新規登録</SignUpText>
+					<SignUpText>新規登録の方はこちら</SignUpText>
 				</ActiveThirdButton>
 
 				<ActiveFourthButton onPress={onGotoSignin}>
-					<SignUpText>Log in</SignUpText>
+					<SignUpText>ログイン</SignUpText>
 				</ActiveFourthButton>
+
+				<ActiveFourthButton onPress={onGotoHome}>
+					<SignUpText>ホームへ</SignUpText>
+				</ActiveFourthButton>
+
 			</AuthContainer>
 		</AuthWrapper>
 	)

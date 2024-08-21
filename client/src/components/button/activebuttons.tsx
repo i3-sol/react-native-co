@@ -10,6 +10,10 @@ interface ActiveFirstButtonProps {
 	text: string
 }
 
+interface ActiveThirdButtonProps extends PressableProps {
+	borderRadius?: number
+}
+
 const ActiveFirstButton = ({ text, active = false }: ActiveFirstButtonProps) => {
 	return (
 		<ActiveFirstButtonWrapper active={active}>
@@ -37,38 +41,39 @@ const ActiveSecondButton = styled(Pressable)<{ borderRadius?: number }>(({ theme
 	borderRadius: borderRadius,
 }))
 
-const ActiveThirdButton = ({ children, ...props }: PressableProps) => {
+const ActiveThirdButton = ({ children, borderRadius = 8, ...props }: ActiveThirdButtonProps) => {
 	return (
 		<ShadowButtonWrapper>
-			<ActiveThirdButtonShadow />
+			<ActiveThirdButtonShadow borderRadius={borderRadius} />
 
-			<ActiveThirdButtonContainer {...props}>
+			<ActiveThirdButtonContainer borderRadius={borderRadius} {...props}>
 				{children}
 			</ActiveThirdButtonContainer>
 		</ShadowButtonWrapper>
 	)
 }
 
-const ActiveThirdButtonContainer = styled(Pressable)(({ theme }) => ({
+const ActiveThirdButtonContainer = styled(Pressable)<{ borderRadius: number }>(({ theme, borderRadius }) => ({
 	display: "flex",
 	flexDirection: "row",
 	alignItems: 'center',
 	justifyContent: 'center',
 
-	borderRadius: 8,
+	borderRadius: borderRadius,
 	padding: getWidth(3.5),
 	background: theme.SecondBackground,
 	border: `1px solid ${theme.SecondBackground}`,
 }))
 
-const ActiveThirdButtonShadow = styled(View)(({ theme }) => ({
+const ActiveThirdButtonShadow = styled(View)<{ borderRadius: number }>(({ theme, borderRadius }) => ({
 	top: 2, left: 2,
 	position: "absolute",
 
 	width: "100%",
 	height: "100%",
-	borderRadius: 8,
+	borderRadius: borderRadius,
 	backgroundColor: theme.black,
+	opacity: 0.25,
 }))
 
 const ShadowButtonWrapper = styled(View)({
@@ -77,12 +82,47 @@ const ShadowButtonWrapper = styled(View)({
 	paddingRight: 2,
 })
 
-const ActiveFourthButton = ({ children, ...props }: PressableProps) => {
+const ActiveFourthButton = ({ children, borderRadius = 8, ...props }: ActiveThirdButtonProps) => {
 	return (
 		<ShadowButtonWrapper>
-			<ActiveFourthButtonShadow />
+			<ActiveFourthButtonShadow borderRadius={borderRadius} />
 
-			<ActiveFourthButtonContainer  {...props}>
+			<ActiveFifthButtonContainer borderRadius={borderRadius} {...props}>
+				{children}
+			</ActiveFifthButtonContainer>
+		</ShadowButtonWrapper>
+	)
+}
+
+
+const ActiveFifthButtonContainer = styled(Pressable)<{ borderRadius: number }>(({ theme, borderRadius }) => ({
+	display: "flex",
+	flexDirection: "row",
+	alignItems: 'center',
+	justifyContent: 'center',
+
+	borderRadius: borderRadius,
+	padding: getWidth(3.5),
+	background: theme.white,
+	border: `1px solid ${theme.SecondBackground}`,
+}))
+
+const ActiveFourthButtonShadow = styled(View)<{ borderRadius: number }>(({ theme, borderRadius }) => ({
+	top: 2, left: 2,
+	position: "absolute",
+
+	width: "100%",
+	height: "100%",
+	borderRadius: borderRadius,
+	backgroundColor: theme.SecondBackground,
+}))
+
+const ActiveFifthButton = ({ children, borderRadius = 8, ...props }: ActiveThirdButtonProps) => {
+	return (
+		<ShadowButtonWrapper>
+			<ActiveFifthButtonShadow borderRadius={borderRadius} />
+
+			<ActiveFourthButtonContainer borderRadius={borderRadius} {...props}>
 				{children}
 			</ActiveFourthButtonContainer>
 		</ShadowButtonWrapper>
@@ -90,26 +130,27 @@ const ActiveFourthButton = ({ children, ...props }: PressableProps) => {
 }
 
 
-const ActiveFourthButtonContainer = styled(Pressable)(({ theme }) => ({
+const ActiveFourthButtonContainer = styled(Pressable)<{ borderRadius: number }>(({ theme, borderRadius, disabled = false }) => ({
 	display: "flex",
 	flexDirection: "row",
 	alignItems: 'center',
 	justifyContent: 'center',
 
-	borderRadius: 8,
-	padding: getWidth(3.5),
-	background: theme.white,
-	border: `1px solid ${theme.SecondBackground}`,
+	borderRadius: borderRadius,
+	padding: `${getWidth(2.5)}px ${getWidth(3)}px`,
+	background: disabled ? theme.fourthBackground : theme.thirdBackground,
+	border: `1px solid ${disabled ? theme.fourthBackground : theme.thirdBackground}`,
 }))
 
-const ActiveFourthButtonShadow = styled(View)(({ theme }) => ({
+const ActiveFifthButtonShadow = styled(View)<{ borderRadius: number }>(({ theme, borderRadius }) => ({
 	top: 2, left: 2,
 	position: "absolute",
 
 	width: "100%",
 	height: "100%",
-	borderRadius: 8,
-	backgroundColor: theme.SecondBackground,
+	borderRadius: borderRadius,
+	backgroundColor: theme.black,
+	opacity: 0.25,
 }))
 
 export {
@@ -117,4 +158,5 @@ export {
 	ActiveSecondButton,
 	ActiveThirdButton,
 	ActiveFourthButton,
+	ActiveFifthButton,
 }

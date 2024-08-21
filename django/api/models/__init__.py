@@ -13,7 +13,7 @@ from .malicious_merge_inquiry import MaliciousMergeInquiry
 from .matching_request import MatchingRequest
 from .merge_chat_message import MergeChatMessage
 from .merge_chat_room import MergeChatRoom
-from .municipalit import Municipality
+from .municipality import Municipality
 from .news_read_status import NewsReadStatus
 from .news import News
 from .no_merge_report import NoMergeReport

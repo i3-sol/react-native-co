@@ -16,7 +16,10 @@ class OpenChat(models.Model):
     region_code = models.IntegerField()
     chat_name = models.CharField(max_length=100)
     chat_description = models.CharField(max_length=500)
-    chat_image_file_name = models.ImageField(upload_to='%y/%m/%d/')
+    chat_image_file_name = models.ImageField(upload_to='chats/%y/%m/%d/')
+    user_number = models.IntegerField(default=0)
+    age_type = models.IntegerField(default=0)
+
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     deleted_flag = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

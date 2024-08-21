@@ -5,6 +5,7 @@ import { createContext, useContext } from "react";
 const INIT_STATE: InitStateObject = {
   lang: "en",
   loading: false,
+  userEmail: ''
 }
 
 // create context

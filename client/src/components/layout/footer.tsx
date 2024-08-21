@@ -19,6 +19,10 @@ const Footer = ({ navigation }: FooterProps) => {
 		navigation.navigate(routerConfig.profile.name)
 	}
 
+	const onHandleMeeting = () => {
+		navigation.navigate(routerConfig.meetingHome.name)
+	}
+
 	return (
 		<FooterWrapper>
 			<FooterItem onPress={onHandleHome}>
@@ -31,7 +35,7 @@ const Footer = ({ navigation }: FooterProps) => {
 				<TextH6>イベント</TextH6>
 			</FooterItem>
 
-			<FooterItem onPress={onHandleHome}>
+			<FooterItem onPress={onHandleMeeting}>
 				<UserGroupIconSvg wiidth={16} height={16} />
 				<TextH6>Meet Now</TextH6>
 			</FooterItem>

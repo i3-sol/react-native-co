@@ -1,57 +1,46 @@
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import styled from "styled-components/native";
 
 import { getWidth } from "../../../theme/responsive";
 import { TextH3 } from "../../../components/typography";
 import { ActiveFirstButton } from "../../../components/button";
 import { HelpIconSvg, PhoneIconSvg } from "../../../assets/image";
+import { useEffectCustom } from "../../../classes/Functions";
+import RestApiClass from "../../../classes/RestApiClass";
+import { routerConfig } from "../../../router-config";
 
-
-interface OptionsType {
-	text: string
+interface PrefectureType {
+	prefecture_name: string
 	active: boolean
 }
 
-const options: OptionsType[] = [
-	{
-		text: "福岡",
-		active: false
-	}, {
-		text: "佐賀",
-		active: false
-	}, {
-		text: "長崎",
-		active: false
-	}, {
-		text: "熊本",
-		active: true
-	}, {
-		text: "大分",
-		active: false
-	}, {
-		text: "宮崎",
-		active: false
-	}, {
-		text: "鹿児島",
-		active: false
-	}, {
-		text: "沖縄",
-		active: false
-	}
-]
 
-const MeetNow = () => {
+const MeetNow = ({ navigation }: ComPropsObject) => {
+	const prefectures: any = useEffectCustom(async () => {
+		let RestApi: RestApiClass = new RestApiClass("prefecture")
+		RestApi.fields(["id", "prefecture_name"])
+		RestApi.wheres("region:8")
+
+		return await RestApi.list({ limit: 20 })
+	})
+
+	const onGotoMeetNow = () => {
+		navigation.navigate(routerConfig.meetNow.name)
+	}
+
 	return (
 		<MeetNowWrapper>
-			<MeetNowHeader>
-				<PhoneIconSvg width={getWidth(7)} height={getWidth(7)} />
-				<TextH3>九州地方のMeet Now</TextH3>
-				<HelpIconSvg width={getWidth(7)} height={getWidth(7)} />
-			</MeetNowHeader>
+			<Pressable onPress={onGotoMeetNow}>
+				<MeetNowHeader>
+					<PhoneIconSvg width={getWidth(7)} height={getWidth(7)} />
+					<TextH3>九州地方のMeet Now</TextH3>
+					<HelpIconSvg width={getWidth(7)} height={getWidth(7)} />
+				</MeetNowHeader>
+			</Pressable>
 
 			<MeetNowContainer>
-				{options.map((option: OptionsType, key: number) => (
-					<ActiveFirstButton text={option.text} active={option.active} key={key} />
+				{prefectures.map((prefecture: PrefectureType, key: number) => (
+					<ActiveFirstButton text={prefecture.prefecture_name} active={prefecture.active} key={key} />
 				))}
 			</MeetNowContainer>
 		</MeetNowWrapper>

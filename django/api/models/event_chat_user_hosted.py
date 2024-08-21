@@ -9,7 +9,7 @@ from django.utils import timezone
 class ModelQuerySet(ModelQuerySetClass):
     default_field = ["id", "event_chat_name"]
 
-    def recommends(self) :
+    def whereRecommend(self) :
         query = self
 
         query = query.filter(event_chat_publish_status=True)
@@ -24,7 +24,7 @@ class ModelQuerySet(ModelQuerySetClass):
         
         if view.request.query_params.getlist("wheres[]"):
             if ("recommends" in view.request.query_params.getlist("wheres[]")) :
-                self = self.recommends()
+                self = self.whereRecommend()
 
         return self
 

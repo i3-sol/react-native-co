@@ -12,7 +12,6 @@ import { BaseTransparentButton } from "../../components/button/basebuttons";
 import { AppleIconSvg, FacebookIconSvg, GoogleIconSvg } from "../../assets/image";
 import { apiNotification } from "../../services/apiNotification";
 import { ValidateError } from "../../services/customError";
-import { validateEmail } from "../../services/validator";
 import { toastMessage } from "../../services/tostMessage";
 import { useGlobalContext } from "../../provider";
 import { restApi } from "../../provider/restApi";
@@ -37,24 +36,24 @@ const SignIn = ({ navigation }: ComPropsObject) => {
 
 	const handleLogin = async () => {
 		try {
-			if (!status.username) {
-				throw new ValidateError("Please enter username!");
-			} else if (!status.password) {
-				throw new ValidateError("Please enter password!");
-			}
+			// if (!status.username) {
+			// 	throw new ValidateError("Please enter username!");
+			// } else if (!status.password) {
+			// 	throw new ValidateError("Please enter password!");
+			// }
 
-			dispatch({ type: "loading", payload: true });
-			const resp = await restApi.sendRequest('auth/login/', status);
+			// dispatch({ type: "loading", payload: true });
+			// const resp = await restApi.sendRequest('auth/login/', status);
 
-			if (!!resp && resp.status === 400) {
-				throw new ValidateError("この項目は必須です。");
-			} else if (!!resp && resp.status === 401) {
-				throw new ValidateError("No active account found with the given credentials");
-			} else if (!!resp && resp.status > 500) {
-				new ValidateError("この項目は必須です。");
-			}
+			// if (!!resp && resp.status === 400) {
+			// 	throw new ValidateError("この項目は必須です。");
+			// } else if (!!resp && resp.status === 401) {
+			// 	throw new ValidateError("No active account found with the given credentials");
+			// } else if (!!resp && resp.status > 500) {
+			// 	new ValidateError("この項目は必須です。");
+			// }
 
-			updateStatus({ username: '', password: '' })
+			// updateStatus({ username: '', password: '' })
 			navigation.navigate(routerConfig.home.name);
 
 			toastMessage("success", "Login successed");

@@ -1,13 +1,13 @@
-import { View } from "react-native";
+import { TextInputProps, View } from "react-native";
 import styled from "styled-components/native";
 import { SearchIconSvg } from "../../assets/image";
 import { BaseTextInput } from "./baseInput";
 
-const SearchInput = () => {
+const SearchInput = (props: TextInputProps) => {
 	return (
 		<SearchInputContainer>
 			<SearchIconSvg width={18} height={18} />
-			<BaseTextInput placeholder="オープンチャットを検索"/>
+			<BaseTextInput {...props} />
 		</SearchInputContainer>
 	)
 }

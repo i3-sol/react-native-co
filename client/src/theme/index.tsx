@@ -6,6 +6,8 @@ declare module 'styled-components/native' {
   export interface DefaultTheme {
     white: string;
     black: string;
+    green: string;
+    red: string;
 
     globalBoxPadding: number
     globalSpacingX: number
@@ -15,6 +17,8 @@ declare module 'styled-components/native' {
     footerBackground: string
     FirstBackground: string
     SecondBackground: string
+    thirdBackground: string
+    fourthBackground: string
 
     typographyBaseColor: string
     typographySecondColor: string
@@ -25,6 +29,7 @@ declare module 'styled-components/native' {
 
     borderBaseColor: string
     borderActiveColor: string
+    borderActiveColor1: string
 
     getWidth: (size: number) => number
     getHeight: (size: number) => number
@@ -35,6 +40,8 @@ const StyledThemeProvider = ({ children }: any) => {
   const theme: DefaultTheme = {
     white: '#ffffff',
     black: '#000000',
+    green: '#40bb10',
+    red: '#bb1010',
 
     globalBoxPadding: getWidth(1.9),
     globalSpacingX: getWidth(3.7),
@@ -44,6 +51,8 @@ const StyledThemeProvider = ({ children }: any) => {
     footerBackground: "#F3F4F6",
     FirstBackground: "#111827",
     SecondBackground: '#60C5D1',
+    thirdBackground: "#86EFAC",
+    fourthBackground: "#E5E7EB",
 
     typographyBaseColor: "#374151",
     typographySecondColor: "#060f1f",
@@ -54,6 +63,7 @@ const StyledThemeProvider = ({ children }: any) => {
 
     borderBaseColor: "#D1D5DB",
     borderActiveColor: "#3B82F6",
+    borderActiveColor1: "#3b83f663",
 
     getWidth: getWidth,
     getHeight: getHeight,

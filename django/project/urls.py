@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from auth.urls import auth_urlpattern
+from user_auth.urls import auth_urlpattern
 
 urlpatterns = [
     path('admin/', admin.site.urls),

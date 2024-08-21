@@ -8,12 +8,20 @@ import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { routerConfig } from './router-config';
 import { Profile } from './pages/profile';
 import { Dashboard } from './pages/dashboard';
-import { SignUp } from './pages/auth/signup';
 import { SignIn } from './pages/auth/signin';
+
+import { SocialSignUp } from './pages/auth/social-signup';
+import { SignUp } from './pages/auth/signup';
+import { PersonalSignUp } from './pages/auth/personal-signup';
+import { StoreSignUp } from './pages/auth/store-signup';
+
+import { MeetingHome, MeetingDetail } from './pages/meeting';
+
 import { Auth } from './pages/auth';
 import { getWidth } from './theme/responsive';
 import { useGlobalContext } from './provider';
 import { Loading } from './components/loading';
+import { MeetNow } from './pages/meetNow';
 
 // Enable screens for better performance
 enableScreens();
@@ -59,10 +67,20 @@ const Routers = () => {
         <Stack.Navigator initialRouteName={routerConfig.auth.name}>
           <Stack.Screen name={routerConfig.auth.name} component={Auth} options={screenOptions} />
           <Stack.Screen name={routerConfig.signin.name} component={SignIn} options={screenOptions} />
+
+          <Stack.Screen name={routerConfig.socialSignup.name} component={SocialSignUp} options={screenOptions} />
           <Stack.Screen name={routerConfig.signup.name} component={SignUp} options={screenOptions} />
+          <Stack.Screen name={routerConfig.personalSignup.name} component={PersonalSignUp} options={screenOptions} />
+          <Stack.Screen name={routerConfig.storeSignup.name} component={StoreSignUp} options={screenOptions} />
 
           <Stack.Screen name={routerConfig.home.name} component={Dashboard} options={screenOptions} />
           <Stack.Screen name={routerConfig.profile.name} component={Profile} options={screenOptions} />
+          
+          <Stack.Screen name={routerConfig.meetingHome.name} component={MeetingHome} options={screenOptions} />
+          <Stack.Screen name={routerConfig.meetingDetail.name} component={MeetingDetail} options={screenOptions} />
+          <Stack.Screen name={routerConfig.meetNow.name} component={MeetNow} options={screenOptions} />
+
+          <Stack.Screen name="*" component={Dashboard} options={screenOptions} />
         </Stack.Navigator>
       </NavigationContainer>
 
