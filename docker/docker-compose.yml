@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: ${PROJECT_NAME}_app
+    build:
+      context: .
+      dockerfile: django/Dockerfile
+    volumes:
+      - ../django:/code/django
+      - ../.env:/code/.env
+    # 8000番ポートをNginx側が接続できるよう開く
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"    
+    command: sh -c "/code/django/entrypoint.sh"
+    #command: ls
+    # コンテナ内の環境変数を.env.prodを使って設定
+    env_file:
+      - ../.env
+  web:
+    # コンテナ名をwebに指定
+    container_name: ${PROJECT_NAME}_web
+    # NginxのDockerfileをビルドする
+    build:
+      # ビルドコンテキストはカレントディレクトリ
+      context: .
+      dockerfile: web/Dockerfile
+    # ボリュームを指定
+    # ローカルの/staticをコンテナの/staticにマウントする
+    volumes:
+      - ../static:/static
+    #ports:
+      # - "80:80"      
+    # 先にappを起動してからwebを起動する
+    environment:
+        VIRTUAL_HOST: ${DOMAIN}
+        LETSENCRYPT_HOST: ${DOMAIN}
+        LETSENCRYPT_EMAIL: makoto@tejima.jp
+    depends_on:
+      - app
+
+networks:
+  default:
+    external:
+      name: shared
+
+volumes:
+  static:

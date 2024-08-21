@@ -1,0 +1,77 @@
+[
+    {
+        "model": "api.region",
+        "pk": 1,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "北海道"
+        }
+    },
+    {
+        "model": "api.region",
+        "pk": 2,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "東北"
+        }
+    },
+    {
+        "model": "api.region",
+        "pk": 3,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "関東"
+        }
+    },
+    {
+        "model": "api.region",
+        "pk": 4,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "中部"
+        }
+    },
+    {
+        "model": "api.region",
+        "pk": 5,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "近畿"
+        }
+    },
+    {
+        "model": "api.region",
+        "pk": 6,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "中国"
+        }
+    },
+    {
+        "model": "api.region",
+        "pk": 7,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "四国"
+        }
+    },
+    {
+        "model": "api.region",
+        "pk": 8,
+        "fields": {
+            "created_at":"2024-08-01T03:25:07.308Z",
+            "updated_at":"2024-08-01T03:25:07.308Z",
+            "region_name": "九州・沖縄"
+        }
+    }
+
+]
+    
+    
