@@ -73,8 +73,8 @@ const CreateNewButton = styled(Pressable)(({ theme }) => ({
 	width: getWidth(31),
 	borderRadius: 20,
 	position: "absolute",
-	left: getWidth(10),
-	bottom: getHeight(5),
+	right: getWidth(4),
+	bottom: getHeight(9),
 }))
 
 const CreateText = styled(TextH3)(({ theme }) => ({

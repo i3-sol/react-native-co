@@ -67,7 +67,8 @@ const SearchBySelectingWrapper = styled(View)(({ theme }) => ({
 	display: "flex",
 	flexDirection: "column",
 	paddingTop: getHeight(1.2),
-	gap: getHeight(2)
+	gap: getHeight(2),
+	paddingBottom: getHeight(14)
 }))
 
 const SearchContainer = styled(View)(({ theme }) => ({

@@ -17,6 +17,8 @@ import { StoreSignUp } from './pages/auth/store-signup';
 
 import { MeetingHome, MeetingDetail } from './pages/meeting';
 
+import { ChatHome } from './pages/chat';
+
 import { Auth } from './pages/auth';
 import { getWidth } from './theme/responsive';
 import { useGlobalContext } from './provider';
@@ -79,6 +81,8 @@ const Routers = () => {
           <Stack.Screen name={routerConfig.meetingHome.name} component={MeetingHome} options={screenOptions} />
           <Stack.Screen name={routerConfig.meetingDetail.name} component={MeetingDetail} options={screenOptions} />
           <Stack.Screen name={routerConfig.meetNow.name} component={MeetNow} options={screenOptions} />
+
+          <Stack.Screen name={routerConfig.chat.name} component={ChatHome} options={screenOptions} />
 
           <Stack.Screen name="*" component={Dashboard} options={screenOptions} />
         </Stack.Navigator>

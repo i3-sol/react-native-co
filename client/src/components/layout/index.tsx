@@ -10,9 +10,10 @@ interface LayoutProps {
 	children?: React.ReactNode
 	disableHeader?: boolean
 	navigation: any
+	disableFooter?: boolean
 }
 
-const Layout = ({ navigation, children, disableHeader = false }: LayoutProps) => {
+const Layout = ({ navigation, children, disableHeader = false, disableFooter = false }: LayoutProps) => {
 	return (
 		<LayoutWrapper disableHeader={disableHeader}>
 			<LayoutContainer>
@@ -28,7 +29,11 @@ const Layout = ({ navigation, children, disableHeader = false }: LayoutProps) =>
 				</ScrollView>
 			</LayoutContainer>
 
-			<Footer navigation={navigation} />
+			{
+				!disableFooter && (
+					<Footer navigation={navigation} />
+				)
+			}
 		</LayoutWrapper>
 	)
 }

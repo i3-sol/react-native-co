@@ -11,6 +11,8 @@ const routerConfig: RouterConfigOptions = {
 	meetingDetail: { name: "/meeting-detail" },
 	meetNow: { name: "/meetnow" },
 	home: { name: "/dashboard" },
+
+	chat: {name: "/chat"}
 }
 
 export { routerConfig };

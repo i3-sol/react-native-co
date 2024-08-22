@@ -23,6 +23,10 @@ const Footer = ({ navigation }: FooterProps) => {
 		navigation.navigate(routerConfig.meetingHome.name)
 	}
 
+	const onHandleChat = () => {
+		navigation.navigate(routerConfig.chat.name)
+	}
+
 	return (
 		<FooterWrapper>
 			<FooterItem onPress={onHandleHome}>
@@ -40,7 +44,7 @@ const Footer = ({ navigation }: FooterProps) => {
 				<TextH6>Meet Now</TextH6>
 			</FooterItem>
 
-			<FooterItem onPress={onHandleHome}>
+			<FooterItem onPress={onHandleChat}>
 				<MessageIconSvg wiidth={16} height={16} />
 				<TextH6>チャット</TextH6>
 			</FooterItem>

@@ -16,4 +16,6 @@ interface RouterConfigOptions {
 	meetingDetail: RouterConfigOption
 
 	meetNow: RouterConfigOption
+
+	chat: RouterConfigOption
 }

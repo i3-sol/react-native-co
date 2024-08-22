@@ -34,6 +34,30 @@ import userAvatar from "./image/icons/userAvatar.svg";
 import plusSvg from "./image/icons/plus-svg.svg";
 import toggleActive from "./image/icons/toggle-active.svg";
 import toggleDisabled from "./image/icons/toggle-disabled.svg";
+import hamburger from "./image/icons/burger.png";
+import camera from "./image/icons/camera.png";
+import gallery from "./image/icons/gallery.png";
+import emoji from "./image/icons/emoji.png";
+
+import userAvatar1 from "./image/icons/userAvatar1.svg"
+import userAvatar2 from "./image/icons/userAvatar2.svg"
+import userAvatar3 from "./image/icons/userAvatar3.svg"
+import userAvatar4 from "./image/icons/userAvatar4.svg"
+
+import emoji1 from "./image/icons/emoji-1.png"
+import emoji2 from "./image/icons/emoji-2.png"
+import emoji3 from "./image/icons/emoji-3.png"
+import emoji4 from "./image/icons/emoji-4.png"
+import emoji5 from "./image/icons/emoji-5.png"
+import emoji6 from "./image/icons/emoji-6.png"
+import emoji7 from "./image/icons/emoji-7.png"
+
+import copy from "./image/icons/copy.png"
+import inform from "./image/icons/inform.png"
+import reply from "./image/icons/reply.png"
+
+import before from "./image/icons/before.svg"
+import after from "./image/icons/after.svg"
 
 import recommended1 from "./image/recommended-chats/recommended-1.png";
 import recommended2 from "./image/recommended-chats/recommended-2.png";
@@ -134,9 +158,31 @@ export const ActiveLeftIconSvg = activeLeft;
 export const ActiveRightIconSvg = activeRight;
 export const SortIconSvg = sort;
 export const UserAvatarIconSvg = userAvatar;
+export const UserAvatarIconSvg1 = userAvatar1;
+export const UserAvatarIconSvg2 = userAvatar2;
+export const UserAvatarIconSvg3 = userAvatar3;
+export const UserAvatarIconSvg4 = userAvatar4;
 export const PlusIconSvg = plusSvg;
-export const ToggleActiveSvg = toggleActive
-export const ToggleDisabledSvg = toggleDisabled
+export const ToggleActiveSvg = toggleActive;
+export const ToggleDisabledSvg = toggleDisabled;
+export const hamburgerIcon = hamburger;
+export const cameraIcon = camera;
+export const galleryIcon = gallery;
+export const emojiIcon = emoji;
+export const emojiImage1 = emoji1;
+export const emojiImage2 = emoji2;
+export const emojiImage3 = emoji3;
+export const emojiImage4 = emoji4;
+export const emojiImage5 = emoji5;
+export const emojiImage6 = emoji6;
+export const emojiImage7 = emoji7;
+
+export const copyIcon = copy;
+export const replyIcon = reply;
+export const informIcon = inform;
+
+export const BeforeIconSvg = before;
+export const AfterIconSvg = after;
 
 export const recommendedImage1 = recommended1;
 export const recommendedImage2 = recommended2;
