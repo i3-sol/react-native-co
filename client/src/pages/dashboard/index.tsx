@@ -10,30 +10,48 @@ import { BaseDivider } from "../../components/divider";
 import { getWidth } from "../../theme/responsive";
 import { FeaturedStores } from "./common/featuredStores";
 import { RecommendedStores } from "./common/recommendedStores";
+import ModelClass from "../../classes/ModelClass";
+import { useEffectCustom } from "../../classes/Functions";
+import StorageClass from "../../classes/StorageClass";
+import { useQuery } from '@tanstack/react-query';
+import RestApiClass from "../../classes/RestApiClass";
+
 
 const Dashboard = ({ navigation }: ComPropsObject) => {
+	
+	let user:any = useEffectCustom(async () => {	
+		let Storage:StorageClass = new StorageClass("user");
+		
+		return await Storage.load()
+	});	
+
+	if (!user.id){
+		return ""
+	}
+
 	return (
 		<Layout navigation={navigation}>
 			<DashboardContainer>
 				{/* categorys search components */}
-				<Categorys />
+				<Categorys user={user} />
 
 				{/* Recommended chats components */}
-				<RecommendedChats />
+				<RecommendedChats user={user} />
 				<BaseDivider />
 
 				{/* Meet now components */}
-				<MeetNow navigation={navigation} />
+				<MeetNow navigation={navigation} user={user} />
 				<BaseDivider />
 
 				{/* Recommended events components */}
-				<RecommendedEvents />
+				<RecommendedEvents user={user} />
+
 
 				{/* Featured stores components */}
-				<FeaturedStores />
+				<FeaturedStores user={user} />
 
 				{/* Recommended stores components */}
-				<RecommendedStores />
+				<RecommendedStores user={user} />
 			</DashboardContainer>
 		</Layout>
 	)

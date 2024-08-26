@@ -130,11 +130,6 @@ const JoinButton = styled(Pressable)(({ theme }) => ({
     marginTop: getHeight(6)
 }))
 
-const JoinText = styled(TextH3)(({ theme }) => ({
-	fontSize: getWidth(3.7),
-	fontWeight: 300,
-}))
-
 const styles = StyleSheet.create({
     title: {
         textAlign: 'center'

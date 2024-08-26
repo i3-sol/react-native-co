@@ -8,6 +8,7 @@ import { HelpIconSvg, PhoneIconSvg } from "../../../assets/image";
 import { useEffectCustom } from "../../../classes/Functions";
 import RestApiClass from "../../../classes/RestApiClass";
 import { routerConfig } from "../../../router-config";
+import { Region } from "../../../components/view/region";
 
 interface PrefectureType {
 	prefecture_name: string
@@ -15,11 +16,9 @@ interface PrefectureType {
 }
 
 
-const MeetNow = ({ navigation }: ComPropsObject) => {
+const MeetNow = ({ navigation,user }: ComPropsObject) => {
 	const prefectures: any = useEffectCustom(async () => {
-		let RestApi: RestApiClass = new RestApiClass("prefecture")
-		RestApi.fields(["id", "prefecture_name"])
-		RestApi.wheres("region:8")
+		let RestApi: RestApiClass = new RestApiClass("prefecture", "region:" + user.region.id)
 
 		return await RestApi.list({ limit: 20 })
 	})
@@ -33,7 +32,7 @@ const MeetNow = ({ navigation }: ComPropsObject) => {
 			<Pressable onPress={onGotoMeetNow}>
 				<MeetNowHeader>
 					<PhoneIconSvg width={getWidth(7)} height={getWidth(7)} />
-					<TextH3>九州地方のMeet Now</TextH3>
+					<TextH3><Region item={user.region} />のMeet Now</TextH3>
 					<HelpIconSvg width={getWidth(7)} height={getWidth(7)} />
 				</MeetNowHeader>
 			</Pressable>

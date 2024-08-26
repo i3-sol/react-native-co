@@ -7,12 +7,10 @@ import { useEffect, useState } from "react";
 import RestApiClass from "../../../classes/RestApiClass";
 import { useEffectCustom } from "../../../classes/Functions";
 
-const Categorys = () => {
+const Categorys = (props:any) => {
 	
-
-	const categoryLists = useEffectCustom(async () => {
+	const categoryLists = useEffectCustom(async () => {		
 		let RestApi:RestApiClass = new RestApiClass("open_chat_category")
-		RestApi.fields(["id", "category_name"])
 		return await RestApi.list({limit:20})				
 	});
 

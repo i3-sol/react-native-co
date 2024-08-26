@@ -10,6 +10,7 @@ import { routerConfig } from "../../router-config";
 
 const Auth = ({ navigation }: ComPropsObject) => {
 	const onGotoHome = () => {
+		navigation.navigate(routerConfig.meetNow.name)
 		navigation.navigate(routerConfig.home.name);
 	}
 

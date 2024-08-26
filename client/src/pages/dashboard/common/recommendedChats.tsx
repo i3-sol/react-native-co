@@ -3,29 +3,33 @@ import styled from "styled-components/native";
 
 import { getWidth } from "../../../theme/responsive";
 import { TextH3, TextH5 } from "../../../components/typography";
-import { recommendedImage3, recommendedImage4, recommendedImage5 } from "../../../assets/image";
-import { recommendedImage1, recommendedImage10, recommendedImage2 } from "../../../assets/image";
+import { Region } from "../../../components/view/region";
 import { PersonIconSvg, recommendedBadgeImage1, recommendedBadgeImage2 } from "../../../assets/image";
-import { recommendedImage6, recommendedImage7, recommendedImage8, recommendedImage9 } from "../../../assets/image";
-import { useEffectCustom } from "../../../classes/Functions";
+import { getUrl, useEffectCustom } from "../../../classes/Functions";
 import RestApiClass from "../../../classes/RestApiClass";
 
 
 
-const RecommendedChats = () => {
+const RecommendedChats = ({ user }: ComPropsObject) => {
+
 	const firstChatLists: any = useEffectCustom(async () => {
-		let RestApi: RestApiClass = new RestApiClass("open_chat")
-		RestApi.fields(["id", "chat_name", "age_type", "user_number"])
-		RestApi.images("chat_image_file_name_thumbnail")
+		let RestApi: RestApiClass = new RestApiClass("open_chat", "recommend", "info")
 
 		return await RestApi.list({ limit: 20 })
 	});
 
+
 	return (
 		<RecommendedChatsWrapper>
 			<RecommendedChatsHeader>
-				<TextH3>九州地方のおすすめチャット</TextH3>
+			
+				<TextH3>
+					<Region item={user.region} />のおすすめチャット
+				</TextH3>
+			
 				<TextH5>もっと見る</TextH5>
+				
+				
 			</RecommendedChatsHeader>
 
 			<ScrollView horizontal>
@@ -40,15 +44,14 @@ const RecommendedChats = () => {
 }
 
 const FirstChatItem = ({ data }: any) => {
-
 	return (
 		<View style={chatItemStyles.container}>
-			{!!data.badge && (
-				<Image source={require("../../../assets/image/recommended-chats/badge-1.png")} style={chatItemStyles.badgeImage1} />
+			{!!data.age_type && (
+				<Image source={require("../../../assets/image/recommended-chats/badge-" + "1" + ".png")} style={chatItemStyles.badgeImage1} />
 			)}
 
 
-			<Image source={{ uri: data.chat_image_file_name_thumbnail }} style={chatItemStyles.image} />
+			<Image source={{ uri: getUrl() + data.chat_image_file_name }} style={chatItemStyles.image} />
 			<TextH5 numberOfLines={2} ellipsizeMode="tail" style={{ flex: 1 }}>
 				{data.chat_name}
 			</TextH5>

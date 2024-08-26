@@ -1,21 +1,30 @@
-import { DEBUG, PRODUCT_DOMAIN,DEVELOPMENT_DOMAIN } from '@env'
 import QueryBuilderClass from './QueryBuilderClass'
+import StorageClass from './StorageClass'
+import { getUrl } from './Functions'
 
 export default class {
   private url:string = ""
-  public isAsync:boolean = true
 
   constructor(api:string){
-    this.url = String(PRODUCT_DOMAIN)
+    this.url = getUrl()
 
-
-    if (DEBUG != "True"){
-      this.url = String(DEVELOPMENT_DOMAIN)
-    }
-
-    this.url+= "/" + api + "/"
+    this.url+= "/api/" + api + "/"
   } 
 
+  /**
+   * 認証
+   * @param params 
+   * @param completeHandle 
+   */
+  public async auth(params:any={}, completeHandle:any = null)
+  {
+    let user:any = await this.http("auth", "get", params, completeHandle)
+    let Storage:StorageClass = new StorageClass("user");
+
+		Storage.save(user)
+		
+    return user
+  }
 
   /**
    * http通信
@@ -24,9 +33,8 @@ export default class {
    * @param params
    * @param fncEnd
    */
-  public async http(path:string, method:string, params:any={}, completeHandle = function(data:any){})
+  public async http(path:string, method:string, params:any={}, completeHandle:any = null)
   {
-    console.log("http")
     const functionHttp = (resolve:any) => {
       let url:string = this.url
 
@@ -51,7 +59,6 @@ export default class {
   
           url += "?" + QueryBuilder.getQuery(params)
       }
-  
       fetch(url, {
         method: method,
         // HTTP リクエストのメソッド
@@ -62,7 +69,7 @@ export default class {
       })
       .then(response => response.json())
       .then(data => {
-        if (this.isAsync){
+        if (!completeHandle){
           resolve(data)
         }else{
           completeHandle(data)
@@ -76,7 +83,7 @@ export default class {
       });  
     }
 
-    if (this.isAsync){
+    if (!completeHandle){
       return new Promise(functionHttp)  
     }else{  
       functionHttp(null);      

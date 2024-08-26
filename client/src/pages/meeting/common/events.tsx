@@ -72,7 +72,8 @@ const Events = () => {
 }
 
 const EventsWrapper = styled(View)(({ theme }) => ({
-    paddingTop: getHeight(8.5),
+    paddingTop: getHeight(3),
+    // paddingTop: getHeight(8.5),
     paddingLeft: getWidth(4),
     paddingRight: getWidth(4),
     display: "flex",
@@ -83,7 +84,7 @@ const AnnouncedContainer = styled(View)(({ theme }) => ({
     display: 'flex',
     flexDirection: 'row',
     gap: getWidth(3.5),
-    paddingBottom: getHeight(6),
+    // paddingBottom: getHeight(6),
 }))
 
 const AnnouncedItem = styled(View)(({ theme }) => ({

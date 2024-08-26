@@ -17,13 +17,14 @@ import { StoreSignUp } from './pages/auth/store-signup';
 
 import { MeetingHome, MeetingDetail } from './pages/meeting';
 
-import { ChatHome } from './pages/chat';
+import { ChangeChatNameSetting, ChangeChatPhotoSetting, ChatHome, ChatSetting, ChangeChatDescSetting } from './pages/chat';
 
 import { Auth } from './pages/auth';
 import { getWidth } from './theme/responsive';
 import { useGlobalContext } from './provider';
 import { Loading } from './components/loading';
-import { MeetNow } from './pages/meetNow';
+import { MeetDetail, MeetNow } from './pages/meetNow';
+import { ChangeChatCategorySetting } from './pages/chat/change-category-setting';
 
 // Enable screens for better performance
 enableScreens();
@@ -80,9 +81,16 @@ const Routers = () => {
           
           <Stack.Screen name={routerConfig.meetingHome.name} component={MeetingHome} options={screenOptions} />
           <Stack.Screen name={routerConfig.meetingDetail.name} component={MeetingDetail} options={screenOptions} />
+
           <Stack.Screen name={routerConfig.meetNow.name} component={MeetNow} options={screenOptions} />
+          <Stack.Screen name={routerConfig.meetDetail.name} component={MeetDetail} options={screenOptions} />
 
           <Stack.Screen name={routerConfig.chat.name} component={ChatHome} options={screenOptions} />
+          <Stack.Screen name={routerConfig.setting.name} component={ChatSetting} options={screenOptions} />
+          <Stack.Screen name={routerConfig.changeChatName.name} component={ChangeChatNameSetting} options={screenOptions} />
+          <Stack.Screen name={routerConfig.changeChatPhoto.name} component={ChangeChatPhotoSetting} options={screenOptions} />
+          <Stack.Screen name={routerConfig.changeChatDesc.name} component={ChangeChatDescSetting} options={screenOptions} />
+          <Stack.Screen name={routerConfig.changeChatCategory.name} component={ChangeChatCategorySetting} options={screenOptions} />
 
           <Stack.Screen name="*" component={Dashboard} options={screenOptions} />
         </Stack.Navigator>

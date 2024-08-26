@@ -7,102 +7,70 @@ import { recommendedEventImage8, recommendedEventImage9 } from "../../../assets/
 import { ActiveHeartIconSvg, DisableHeartIconSvg, recommendedEventImage1 } from "../../../assets/image";
 import { recommendedEventImage2, recommendedEventImage3, recommendedEventImage4 } from "../../../assets/image";
 import { recommendedEventImage5, recommendedEventImage6, recommendedEventImage7 } from "../../../assets/image";
+import { Prefecture } from "../../../components/view/prefecture";
+import { EventDate } from "../../../components/view/event";
+import { date, getUrl, useEffectCustom } from "../../../classes/Functions";
+import RestApiClass from "../../../classes/RestApiClass";
 
-interface FirstEventItemProps {
-	data: Events1List
+interface EventItemProps {
+	data: EventsList
 }
 
-interface SecondEventItemProps {
-	data: Events2List
+interface EventsList {
+	event_chat_name: string
+	event_chat_introduction: string
+	event_chat_recruitment_start_on: string
+	event_chat_image1_thumbnail: string
+	event_chat_image2_thumbnail: string,
+	address:string,
+	store:any
 }
 
-interface Events1List {
-	image: any
-	avatar: any
-	dateTime: string
-	street: string
-	city: string
-	country: string
-	favorite: boolean
-}
 
-interface Events2List {
-	image: any
-	dateTime: string
-	title: string
-	name: string
-	favorite: boolean
-}
+const RecommendedEvents = ({ user }: ComPropsObject) => {
 
-const firstEventLists: Events1List[] = [
-	{
-		image: recommendedEventImage1,
-		avatar: recommendedEventImage7,
-		dateTime: '2024.01.01',
-		street: 'カレー付きが集まる大名',
-		city: '熊本市中央区',
-		country: 'リアルインド',
-		favorite: false,
-	}, {
-		image: recommendedEventImage2,
-		avatar: recommendedEventImage8,
-		dateTime: '2024.01.01',
-		street: 'クライミングの初心者集れ！',
-		city: '開催場所',
-		country: '居酒屋　とりあえず',
-		favorite: false,
-	}, {
-		image: recommendedEventImage3,
-		avatar: recommendedEventImage9,
-		dateTime: '2024.01.01',
-		street: 'イベント名',
-		city: '開催場所',
-		country: '店名',
-		favorite: false,
+	const events = useEffectCustom(async () => {
+		let events:any = {
+			stores:[],
+			users:[]
+		}
+
+		
+		let RestApiStore: RestApiClass = new RestApiClass("event_chat_store_hosted", "recommend", "info")
+		events.stores = await RestApiStore.list({ limit: 20 })
+		
+		let RestApiUser: RestApiClass = new RestApiClass("event_chat_user_hosted", "recommend", "info")
+		events.users = await RestApiUser.list({ limit: 20 })
+
+		return events
+	});
+
+	if (!events.stores){
+		events.stores = []
 	}
-]
-
-const secondEventLists: Events2List[] = [
-	{
-		image: recommendedEventImage4,
-		dateTime: '2024.01.01',
-		title: 'キャンプ好きが集う',
-		name: '熊本市南区',
-		favorite: true
-	}, {
-		image: recommendedEventImage5,
-		dateTime: '2024.01.01',
-		title: 'nekoよりInu派',
-		name: '熊本市中央区',
-		favorite: false
-	}, {
-		image: recommendedEventImage6,
-		dateTime: '2024.01.01',
-		title: 'フラワーアレンジメント',
-		name: '熊本市西区',
-		favorite: false
+	if (!events.users){
+		events.users = []
 	}
-]
 
-const RecommendedEvents = () => {
 	return (
 		<RecommendedEventsWrapper>
 			<RecommendedEventsHeader>
-				<TextH3>熊本県の今週のピックアップ店舗</TextH3>
+				<TextH3><Prefecture item={user.prefecture} />のおすすめイベント</TextH3>
 				<TextH5>もっと見る</TextH5>
 			</RecommendedEventsHeader>
 
 			<ScrollView horizontal>
 				<RecommendedEventsContainer>
-					{firstEventLists.map((item: Events1List, key: number) => (
+					{events.stores.map((item: EventsList, key: number) => (
 						<FirstEventItem data={item} key={key} />
 					))}
 				</RecommendedEventsContainer>
+
 			</ScrollView>
 
 			<ScrollView horizontal>
 				<RecommendedEventsContainer>
-					{secondEventLists.map((item: Events2List, key: number) => (
+					{events.users.map((item: EventsList, key: number) => (
 						<SecondEventItem data={item} key={key} />
 					))}
 				</RecommendedEventsContainer>
@@ -114,7 +82,7 @@ const RecommendedEvents = () => {
 const FirstEventItem = ({ data }: FirstEventItemProps) => {
 	return (
 		<FirstEventItemWrapper style={firstEventStyles.container}>
-			<Image source={data.image} style={firstEventStyles.image} />
+			<Image source={{uri:getUrl() + data.event_chat_image1}} style={firstEventStyles.image} />
 
 			{data.favorite && (
 				<ActiveHeartIconSvg
@@ -133,13 +101,14 @@ const FirstEventItem = ({ data }: FirstEventItemProps) => {
 			)}
 
 			<View style={firstEventStyles.contentContainer}>
-				<Image source={data.avatar} style={firstEventStyles.avatar} />
+				{data.store && <Image source={{uri:getUrl() + data.store.image1}} style={firstEventStyles.avatar} /> }
+
 
 				<View style={firstEventStyles.contents}>
-					<TextH6 numberOfLines={1} ellipsizeMode="tail">{data.dateTime}</TextH6>
-					<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.street}</TextH5>
-					<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.city}</TextH5>
-					<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.country}</TextH5>
+					<TextH6 numberOfLines={1} ellipsizeMode="tail"><EventDate item={data} /></TextH6>
+					<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.event_chat_name}</TextH5>
+					<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.address}</TextH5>
+					<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.store.store_name}</TextH5>
 				</View>
 			</View>
 		</FirstEventItemWrapper>
@@ -147,9 +116,11 @@ const FirstEventItem = ({ data }: FirstEventItemProps) => {
 }
 
 const SecondEventItem = ({ data }: SecondEventItemProps) => {
+	console.log(data)
+
 	return (
 		<FirstEventItemWrapper style={secondEventStyles.container}>
-			<Image source={data.image} style={secondEventStyles.image} />
+			<Image source={{uri: getUrl() +  data.event_chat_image1}} style={secondEventStyles.image} />
 
 			{data.favorite && (
 				<ActiveHeartIconSvg
@@ -168,9 +139,9 @@ const SecondEventItem = ({ data }: SecondEventItemProps) => {
 			)}
 
 			<View style={secondEventStyles.contentContainer}>
-				<TextH6 numberOfLines={1} ellipsizeMode="tail">{data.dateTime}</TextH6>
-				<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.title}</TextH5>
-				<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.name}</TextH5>
+				<TextH6 numberOfLines={1} ellipsizeMode="tail"><EventDate item={data} /></TextH6>
+				<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.event_chat_name}</TextH5>
+				<TextH5 numberOfLines={1} ellipsizeMode="tail">{data.address}</TextH5>
 			</View>
 		</FirstEventItemWrapper>
 	)

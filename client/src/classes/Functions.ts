@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
+import { DEBUG, PRODUCT_DOMAIN,DEVELOPMENT_DOMAIN } from '@env'
+import DateClass from "./DateClass"
 
-const useEffectCustom = (functions:any) =>
+const useEffectCustom = (functions:any, data:any={}) =>
 {
     const [categoryLists, setCategoryList] = useState([])
 
 	useEffect(() => {    
-		// 非同期処理の場合は、関数を定義しそれを呼び出すような形式で記述すること
 		const fetch = async () => {
-            const items:any = await functions()
+            const items:any = await functions(data)
 
             setCategoryList(items)
         }
@@ -17,4 +18,26 @@ const useEffectCustom = (functions:any) =>
     return categoryLists
 }
 
-export {useEffectCustom}
+const getUrl = () =>
+{
+    let url:string = String(PRODUCT_DOMAIN)
+    
+    if (DEBUG == "True"){
+      url = String(DEVELOPMENT_DOMAIN)
+    }
+    return url
+
+}
+
+const date = (type:string, date:string) : string =>
+{
+    if (!date){
+        return ""
+    }
+
+    let $DateClass = new DateClass(date)
+
+    return $DateClass.date(type)
+}
+
+export {useEffectCustom, getUrl, date}

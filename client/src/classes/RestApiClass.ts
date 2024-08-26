@@ -1,55 +1,21 @@
 import ModelClass from './ModelClass';
 
 export default class extends ModelClass {
-    public params:any = {fields:[], images:[], wheres:[]}
+    public params:any = {}
+    public query:string = ""
+    public seriallizer:string = ""
 
-    constructor(api:string){
+    constructor(api:string, query:string="", seriallizer:string=""){
       super(api);
+
+      this.query = query
+      this.seriallizer = seriallizer
     } 
 
-    public async list(params:any, completeHandle:any=() => {})
+    
+    public async list(params:any, completeHandle:any=null)
     {
       return await this.http("", "GET", params, completeHandle)
-
-    }
-
-    public fields(data:any)
-    {
-      if (typeof data == "string"){
-        this.params.fields.push(data)
-      }else{
-        for (let index in data){
-          this.params.fields.push(data[index])
-        }
-      }
-
-      return this
-    }
-
-    public images(data:any)
-    {
-      if (typeof data == "string"){
-        this.params.images.push(data)
-      }else{
-        for (let index in data){
-          this.params.images.push(data[index])
-        }
-      }
-
-      return this
-    }
-
-    public wheres(data:any)
-    {
-      if (typeof data == "string"){
-        this.params.wheres.push(data)
-      }else{
-        for (let index in data){
-          this.params.wheres.push(data[index])
-        }
-      }
-
-      return this
     }
 
 
@@ -58,13 +24,9 @@ export default class extends ModelClass {
       if (!params){
         params = {}
       }
+      params.query = this.query
+      params.seriallizer = this.seriallizer
 
-      params.fields = this.params.fields
-      params.images = this.params.images
-      params.wheres = this.params.wheres
-
-      console.log(this.params.wheres)
-      
       return await super.http(url, method, params, completeHandle)
 
     }

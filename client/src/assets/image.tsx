@@ -7,6 +7,7 @@ import userGroup from "./image/icons/userGroup.svg";
 import message from "./image/icons/message.svg";
 import user from "./image/icons/user.svg";
 import person from "./image/icons/person.svg";
+import personOutline from "./image/icons/person-outline.svg";
 import help from "./image/icons/help.svg";
 import phone from "./image/icons/phone.svg";
 import activePhone from "./image/icons/active-phone.svg";
@@ -20,6 +21,7 @@ import google from "./image/icons/google.svg";
 import apple from "./image/icons/apple.svg";
 import facebook from "./image/icons/facebook.svg";
 import cancel from "./image/icons/cacel-black.png";
+import cancelCircle from "./image/icons/cancel-circle.svg";
 import arrowLeft from "./image/icons/arrow-left.png";
 import plus from "./image/icons/plus.png";
 import moreVert from "./image/icons/more_vert.png";
@@ -33,16 +35,34 @@ import sort from "./image/icons/sort.svg";
 import userAvatar from "./image/icons/userAvatar.svg";
 import plusSvg from "./image/icons/plus-svg.svg";
 import toggleActive from "./image/icons/toggle-active.svg";
+import toggleActiveSky from "./image/icons/toggle-active-sky.svg";
 import toggleDisabled from "./image/icons/toggle-disabled.svg";
 import hamburger from "./image/icons/burger.png";
 import camera from "./image/icons/camera.png";
 import gallery from "./image/icons/gallery.png";
 import emoji from "./image/icons/emoji.png";
+import setting from "./image/icons/setting.svg";
+import notificationOff from "./image/icons/notification-off.svg";
+import logout from "./image/icons/logout.svg";
+import close from "./image/icons/close.svg";
+import arrowRight from "./image/icons/arrow-right.svg";
+import checked from "./image/icons/checked.svg";
+import unchecked from "./image/icons/unchecked.svg";
 
 import userAvatar1 from "./image/icons/userAvatar1.svg"
 import userAvatar2 from "./image/icons/userAvatar2.svg"
 import userAvatar3 from "./image/icons/userAvatar3.svg"
 import userAvatar4 from "./image/icons/userAvatar4.svg"
+
+import pfp1 from "./image/users/pfp-1.svg" 
+import pfp2 from "./image/users/pfp-2.svg" 
+import pfp3 from "./image/users/pfp-3.svg" 
+import pfp4 from "./image/users/pfp-4.svg" 
+import pfp5 from "./image/users/pfp-5.svg" 
+import pfp6 from "./image/users/pfp-6.svg" 
+import pfp7 from "./image/users/pfp-7.svg" 
+import pfp8 from "./image/users/pfp-8.svg" 
+import pfp9 from "./image/users/pfp-9.svg" 
 
 import emoji1 from "./image/icons/emoji-1.png"
 import emoji2 from "./image/icons/emoji-2.png"
@@ -134,6 +154,7 @@ export const UserGroupIconSvg = userGroup;
 export const MessageIconSvg = message;
 export const UserIconSvg = user;
 export const PersonIconSvg = person;
+export const PersonOutlineIconSvg = personOutline;
 export const HelpIconSvg = help;
 export const PhoneIconSvg = phone;
 export const ActivePhoneSvg = activePhone;
@@ -146,6 +167,26 @@ export const ResturantIconSvg = resturant;
 export const GoogleIconSvg = google;
 export const AppleIconSvg = apple;
 export const FacebookIconSvg = facebook;
+export const ArrowRightIconSvg = arrowRight;
+export const CheckedIconSvg = checked;
+export const UnCheckedIconSvg = unchecked;
+
+export const SettingIconSvg = setting;
+export const NotificationOffIconSvg = notificationOff;
+export const LogoutIconSvg = logout;
+export const CloseIconSvg = close;
+export const CancelCircleIconSvg = cancelCircle;
+
+export const PfpSvgIcon1 = pfp1 
+export const PfpSvgIcon2 = pfp2
+export const PfpSvgIcon3 = pfp3
+export const PfpSvgIcon4 = pfp4
+export const PfpSvgIcon5 = pfp5
+export const PfpSvgIcon6 = pfp6
+export const PfpSvgIcon7 = pfp7
+export const PfpSvgIcon8 = pfp8
+export const PfpSvgIcon9 = pfp9
+
 export const cancelIcon = cancel;
 export const arrowLeftIcon = arrowLeft;
 export const plusIcon = plus;
@@ -164,6 +205,7 @@ export const UserAvatarIconSvg3 = userAvatar3;
 export const UserAvatarIconSvg4 = userAvatar4;
 export const PlusIconSvg = plusSvg;
 export const ToggleActiveSvg = toggleActive;
+export const ToggleActiveSkySvg = toggleActiveSky;
 export const ToggleDisabledSvg = toggleDisabled;
 export const hamburgerIcon = hamburger;
 export const cameraIcon = camera;

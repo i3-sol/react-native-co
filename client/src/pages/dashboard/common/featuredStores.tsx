@@ -4,24 +4,40 @@ import styled from "styled-components/native";
 import { TextH3, TextH4, TextH5 } from "../../../components/typography";
 import { featuredStoreImage, PlaceWhiteIconSvg } from "../../../assets/image";
 import { getWidth } from "../../../theme/responsive";
+import { getUrl, useEffectCustom } from "../../../classes/Functions";
+import RestApiClass from "../../../classes/RestApiClass";
 
-const FeaturedStores = () => {
+const FeaturedStores = ({ user }: ComPropsObject) => {
+	const store:any = useEffectCustom(async () => {
+
+		let RestApi: RestApiClass = new RestApiClass("store", "pickup", "info")		
+
+		let stores:any = await RestApi.list({limit:1})
+
+		if (stores[0]){
+			return stores[0]
+		}
+
+		return null
+	})
+
+	
 	return (
 		<FeaturedStoresWrapper>
 			<FeaturedStoresHeader>
-				<TextH3>熊本県の今週のピックアップ店舗</TextH3>
+				<TextH3>{user.prefecture.prefecture_name}の今週のピックアップ店舗</TextH3>
 				<TextH5>もっと見る</TextH5>
 			</FeaturedStoresHeader>
 
 			<FeaturedStoresContainer>
-				<Image source={featuredStoreImage} style={featuredStoreStyles.image} />
+				<Image source={{url:getUrl() + store.image1}} style={featuredStoreStyles.image} />
 
 				<View style={featuredStoreStyles.contentContainer}>
-					<TextH3 style={featuredStoreStyles.text}>Japanese cuisine 菜な</TextH3>
+					<TextH3 style={featuredStoreStyles.text}>{store.store_name}</TextH3>
 
 					<View style={featuredStoreStyles.place}>
 						<PlaceWhiteIconSvg width={getWidth(4)} height={getWidth(4)}/>
-						<TextH4 style={featuredStoreStyles.text}>熊本市中央区</TextH4>
+						<TextH4 style={featuredStoreStyles.text}>{store.address}</TextH4>
 					</View>
 				</View>
 			</FeaturedStoresContainer>
